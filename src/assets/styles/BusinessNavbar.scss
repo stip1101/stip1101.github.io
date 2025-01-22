@@ -1,0 +1,123 @@
+.business-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+
+  .navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.5rem;
+
+    img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+
+      .solus {
+        color: #00ffff;
+        font-size: 1.2rem;
+        font-family: 'Rexlia', sans-serif;
+      }
+
+      .ambassadors {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.8rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+
+      &:hover {
+        color: #00ffff;
+      }
+
+      &.active {
+        color: #00ffff;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      }
+    }
+  }
+
+  .profile-btn {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(0, 255, 255, 0.2);
+      border-color: rgba(0, 255, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .business-navbar {
+    .navbar-container {
+      padding: 1rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .business-navbar {
+    .logo {
+      .logo-text {
+        display: none;
+      }
+    }
+
+    .nav-links {
+      display: none;
+    }
+  }
+} 

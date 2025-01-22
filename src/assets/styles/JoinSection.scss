@@ -1,0 +1,118 @@
+.join-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 4rem 2rem;
+  position: relative;
+  background: rgba(243, 46, 151, 0.05);
+  border: 1px solid rgba(243, 46, 151, 0.2);
+  border-radius: 24px;
+  overflow: hidden;
+
+  .particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .join-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    
+    h2 {
+      font-family: 'Rexlia', sans-serif;
+      font-size: 3.5rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 30px rgba(243, 46, 151, 0.5);
+    }
+
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    .join-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 3rem;
+      background: rgba(243, 46, 151, 0.1);
+      border: 2px solid #f32e97;
+      border-radius: 4px;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      min-width: 200px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(243, 46, 151, 0.3),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover {
+        background: rgba(243, 46, 151, 0.2);
+        box-shadow: 0 0 30px rgba(243, 46, 151, 0.3);
+        transform: translateY(-2px);
+
+        &::before {
+          opacity: 1;
+          animation: buttonGlow 2s linear infinite;
+        }
+      }
+
+      .button-icon {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@keyframes buttonGlow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .join-section {
+    padding: 3rem 1.5rem;
+    
+    .join-content {
+      h2 {
+        font-size: 2.5rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+} 

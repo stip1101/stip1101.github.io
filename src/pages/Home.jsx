@@ -1,290 +1,137 @@
-import { motion } from 'framer-motion'
-import ParticlesBackground from '../components/ParticlesBackground'
-import LogoAnimation from '../components/LogoAnimation'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import ReactFullpage from '@fullpage/react-fullpage'
 import '../assets/styles/Home.scss'
-import GeometricParticles from '../components/GeometricParticles'
-import HexagonParticles from '../components/HexagonParticles'
-import { useNavigate } from 'react-router-dom'
+import ParticlesBackground from '../components/ParticlesBackground'
+import LogoParticles from '../components/LogoParticles'
+import { RiPencilRuler2Line, RiTeamLine, RiHandCoinLine, RiLineChartLine } from 'react-icons/ri'
 
 const Home = () => {
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.2,
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    })
-  }
+  const [isLoading, setIsLoading] = useState(true)
+  const [contentVisible, setContentVisible] = useState(false)
 
-  const letterVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
-  }
+  useEffect(() => {
+    const loadTimer = setTimeout(() => {
+      setIsLoading(false)
+      setTimeout(() => setContentVisible(true), 100)
+    }, 800)
 
-  const createLetterAnimations = (text) => {
-    return text.split('').map((char, index) => (
-      <motion.span
-        key={index}
-        variants={letterVariants}
-        initial="hidden"
-        animate="visible"
-        transition={{
-          delay: index * 0.05,
-          duration: 0.5
-        }}
-        style={{ 
-          display: 'inline-block',
-          width: char === ' ' ? '0.5em' : 'auto'
-        }}
-      >
-        {char}
-      </motion.span>
-    ))
-  }
-
-  const descriptionVariants = {
-    hidden: { 
-      opacity: 0,
-      scale: 0.95
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        staggerChildren: 0.08,
-        delayChildren: 0.3,
-        ease: "easeOut"
-      }
-    }
-  }
-
-  const wordVariants = {
-    hidden: { 
-      opacity: 0,
-      y: 30,
-      rotateX: -20,
-      filter: "blur(10px)"
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.9,
-        ease: [0.215, 0.61, 0.355, 1]
-      }
-    }
-  }
-
-  const renderAnimatedText = (text) => {
-    return text.split(' ').map((word, i) => (
-      <motion.span
-        key={i}
-        variants={wordVariants}
-        className="animated-word"
-      >
-        {word}{' '}
-      </motion.span>
-    ))
-  }
-
-  const navigate = useNavigate()
+    return () => clearTimeout(loadTimer)
+  }, [])
 
   return (
-    <div className="home">
-      <ParticlesBackground />
-      <section className="hero-section">
-        <div className="hero-content">
-          <div className="main-content">
-            <motion.div className="hero-titles">
-              <motion.h1
-                className="welcome-text"
-                custom={0}
-                variants={titleVariants}
-                initial="hidden"
-                animate="visible"
-                style={{
-                  position: 'relative',
-                  display: 'inline-block',
-                  width: '100%',
-                  fontSize: '2rem',
-                  marginBottom: '1rem'
-                }}
-              >
-                {createLetterAnimations('WELCOME TO')}
-              </motion.h1>
-              {['SOLUS', 'AMBASSADOR', 'PROGRAM'].map((text, i) => (
-                <motion.h1
-                  key={text}
-                  custom={i + 1}
-                  variants={titleVariants}
-                  initial="hidden"
-                  animate="visible"
-                  style={{
-                    position: 'relative',
-                    display: 'inline-block',
-                    width: '100%'
-                  }}
-                >
-                  {createLetterAnimations(text)}
-                  <motion.div
-                    className="line-effect"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{
-                      delay: (i + 1) * 0.2 + 0.5,
-                      duration: 0.8,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </motion.h1>
-              ))}
-            </motion.div>
-
-            <LogoAnimation />
-          </div>
-        </div>
-      </section>
-
-      <motion.section 
-        className="description-section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-200px" }}
-      >
+    <AnimatePresence>
+      {isLoading ? (
         <motion.div 
-          className="description-container"
-          variants={descriptionVariants}
+          className="loading-screen"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
         >
-          <motion.p className="description-text">
-            {renderAnimatedText(
-              "The Solus Ambassador Program offers exceptional opportunities for content creators and business developers alike."
-            )}
-          </motion.p>
-          <motion.p className="description-text highlight">
-            {renderAnimatedText(
-              "Choose your path, join the Solus community, and earn exclusive rewards for your contributions!"
-            )}
-          </motion.p>
-          
-          <motion.div 
-            className="glowing-line"
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            transition={{ delay: 2, duration: 1 }}
-            viewport={{ once: true }}
-          />
+          <div className="loading-spinner" />
         </motion.div>
-      </motion.section>
+      ) : (
+        <ReactFullpage
+          scrollingSpeed={1000}
+          scrollHorizontally={false}
+          render={({ state, fullpageApi }) => {
+            return (
+              <ReactFullpage.Wrapper>
+                <div className="section">
+                  {contentVisible && (
+                    <section className="hero-section">
+                      <ParticlesBackground />
+                      <div className="container">
+                        <div className="hero-content">
+                          <h2 className="welcome-text">WELCOME TO</h2>
+                          <h1 className="main-title">SOLUS AMBASSADOR PROGRAM</h1>
+                        </div>
+                      </div>
+                      <div className="logo-wrapper">
+                        <LogoParticles />
+                      </div>
+                    </section>
+                  )}
+                </div>
 
-      <motion.section 
-        className="geometric-section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.1
-            }
-          }
-        }}
-      >
-        <div className="figures-container">
-          <motion.div className="figure-wrapper left">
-            <HexagonParticles />
-            <motion.div 
-              className="button-container"
-              variants={{
-                hidden: { 
-                  opacity: 0,
-                  y: 20
-                },
-                visible: { 
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 0.8,
-                    ease: [0.215, 0.61, 0.355, 1]
-                  }
-                }
-              }}
-            >
-              <motion.button
-                className="content-creator-btn"
-                onClick={() => navigate('/content-creation')}
-                whileHover="hover"
-                variants={{
-                  hover: {
-                    scale: 1.05,
-                    transition: {
-                      duration: 0.3,
-                      yoyo: Infinity
-                    }
-                  }
-                }}
-              >
-                <span className="btn-text">Become Content Creator</span>
-                <div className="btn-glow" />
-              </motion.button>
-            </motion.div>
-          </motion.div>
-
-          <motion.div className="figure-wrapper right">
-            <GeometricParticles />
-            <motion.div 
-              className="button-container"
-              variants={{
-                hidden: { 
-                  opacity: 0,
-                  y: 20
-                },
-                visible: { 
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 0.8,
-                    ease: [0.215, 0.61, 0.355, 1]
-                  }
-                }
-              }}
-            >
-              <motion.button
-                className="business-dev-btn"
-                onClick={() => navigate('/business-development')}
-                whileHover="hover"
-                variants={{
-                  hover: {
-                    scale: 1.05,
-                    transition: {
-                      duration: 0.3,
-                      yoyo: Infinity
-                    }
-                  }
-                }}
-              >
-                <span className="btn-text">Become Business Dev</span>
-                <div className="btn-glow" />
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </motion.section>
-    </div>
+                <div className="section">
+                  {contentVisible && (
+                    <section className="rewards-section">
+                      <ParticlesBackground />
+                      <div className="container">
+                        <motion.div 
+                          className="hero-content"
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8 }}
+                        >
+                          <h2>
+                            Your <span className="highlight-cyan">Contributions</span>, Your <span className="highlight-purple">Rewards</span>
+                          </h2>
+                        </motion.div>
+                        <div className="rewards-grid">
+                          {[
+                            {
+                              icon: <RiPencilRuler2Line className="icon" />,
+                              title: "Create and Earn",
+                              text: "Produce unique content and unlock rewards like $150/month stipends, priority access, and leadership opportunities with $300+ monthly pay."
+                            },
+                            {
+                              icon: <RiTeamLine className="icon" />,
+                              title: "Connect for Bonuses",
+                              text: "Build chats with potential clients and earn $50–90 per chat, plus ongoing bonus cycles."
+                            },
+                            {
+                              icon: <RiHandCoinLine className="icon" />,
+                              title: "Close the Deal",
+                              text: "Secure $200 for every Offer sent and $1,500+ when referred projects become Solus clients."
+                            },
+                            {
+                              icon: <RiLineChartLine className="icon" />,
+                              title: "Climb Higher",
+                              text: "Focus on High Priority projects to maximize your earnings and gain exclusive rewards."
+                            }
+                          ].map((card, index) => (
+                            <motion.div
+                              key={index}
+                              className="reward-card"
+                              initial={{ opacity: 0, y: 50 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ 
+                                duration: 0.6,
+                                delay: 0.2 + (index * 0.1),
+                                ease: "easeOut"
+                              }}
+                            >
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ 
+                                  duration: 0.5,
+                                  delay: 0.4 + (index * 0.1),
+                                  type: "spring",
+                                  stiffness: 200
+                                }}
+                              >
+                                {card.icon}
+                              </motion.div>
+                              <h3>{card.title}</h3>
+                              <p>{card.text}</p>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+                  )}
+                </div>
+              </ReactFullpage.Wrapper>
+            )
+          }}
+        />
+      )}
+    </AnimatePresence>
   )
 }
 

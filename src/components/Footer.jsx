@@ -1,15 +1,10 @@
-import '../assets/styles/Footer.scss'
+import React from 'react'
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-container">
-        <div className="footer-content">
-          <div className="footer-logo">
-            <img src="/logo.svg" alt="SOLUS.dea" />
-          </div>
-          <p>© 2024 SOLUS.dea. All rights reserved.</p>
-        </div>
+      <div className="container">
+        <p>© 2024 Solus Ambassador Program. All rights reserved.</p>
       </div>
     </footer>
   )

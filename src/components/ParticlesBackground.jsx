@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import '../assets/styles/ParticlesBackground.scss'
 
 const ParticlesBackground = () => {
   const canvasRef = useRef(null)
@@ -8,15 +7,12 @@ const ParticlesBackground = () => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     
-    // Устанавливаем размер canvas равным размеру окна
     const setCanvasSize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
     setCanvasSize()
-    window.addEventListener('resize', setCanvasSize)
 
-    // Создаем массив частиц
     const particles = []
     const particleCount = 50
 
@@ -25,58 +21,76 @@ const ParticlesBackground = () => {
         this.x = Math.random() * canvas.width
         this.y = Math.random() * canvas.height
         this.size = Math.random() * 2 + 1
-        this.speedX = Math.random() * 3 - 1.5
-        this.speedY = Math.random() * 3 - 1.5
-        this.opacity = Math.random() * 0.5 + 0.3
+        this.angle = Math.random() * 360
+        this.speed = 0.2 + Math.random() * 0.3
+        this.color = Math.random() > 0.5 ? 
+          'rgba(0, 206, 209, 0.4)' :  // циан
+          'rgba(73, 42, 94, 0.4)'     // фиолетовый
       }
 
       update() {
-        this.x += this.speedX
-        this.y += this.speedY
+        // Плавное движение по синусоиде
+        this.angle += this.speed
+        this.x += Math.cos(this.angle * Math.PI / 180) * 0.5
+        this.y += Math.sin(this.angle * Math.PI / 180) * 0.5
 
         // Возвращаем частицы в пределы экрана
-        if (this.x > canvas.width) this.x = 0
         if (this.x < 0) this.x = canvas.width
-        if (this.y > canvas.height) this.y = 0
+        if (this.x > canvas.width) this.x = 0
         if (this.y < 0) this.y = canvas.height
+        if (this.y > canvas.height) this.y = 0
       }
 
       draw() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0, 255, 255, ${this.opacity})`
-        ctx.shadowBlur = 15
-        ctx.shadowColor = 'rgba(0, 255, 255, 0.5)'
+        ctx.fillStyle = this.color
         ctx.fill()
       }
     }
 
-    // Создаем начальные частицы
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle())
     }
 
-    // Функция анимации
+    let animationFrameId
+
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      // Обновляем и отрисовываем каждую частицу
       particles.forEach(particle => {
         particle.update()
         particle.draw()
       })
-      
-      requestAnimationFrame(animate)
+      animationFrameId = requestAnimationFrame(animate)
     }
 
+    let resizeTimeout
+    const handleResize = () => {
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(setCanvasSize, 200)
+    }
+
+    window.addEventListener('resize', handleResize)
     animate()
 
     return () => {
-      window.removeEventListener('resize', setCanvasSize)
+      window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(animationFrameId)
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="particles-canvas" />
+  return (
+    <canvas 
+      ref={canvasRef} 
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        pointerEvents: 'none',
+        zIndex: 3
+      }}
+    />
+  )
 }
 
 export default ParticlesBackground 

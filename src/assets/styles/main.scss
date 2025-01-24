@@ -1,8 +1,19 @@
 :root {
-  --primary-color: #00ffff;
-  --background-color: #000000;
-  --text-color: #ffffff;
-  --accent-color: #00ffff;
+  --gradient-main: linear-gradient(135deg,
+    rgb(0, 45, 45) 0%,          /* темный циан */
+    rgb(0, 65, 65) 15%,         /* насыщенный циан */
+    rgb(0, 85, 85) 30%,         /* яркий циан */
+    #492a5e 60%,                /* точный фиолетовый для центра */
+    rgb(60, 35, 90) 80%,        /* насыщенный фиолетовый */
+    #3c235a 100%                /* точный темный фиолетовый */
+  );
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --font-headings: 'Rexlia', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --particle-cyan: rgba(0, 206, 209, 0.4);
+  --particle-purple: rgba(73, 42, 94, 0.4);
+  --container-padding: 1rem;  // уменьшаем паддинг
 }
 
 * {
@@ -12,23 +23,143 @@
 }
 
 body {
-  font-family: 'Courier New', monospace;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
+  font-family: var(--font-body);
+  background: #0A0A0A;
+  color: var(--text-primary);
+  min-height: 100vh;
 }
 
 .app {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: 
+    radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(0, 0, 0, 0.5) 60%,
+      rgba(0, 0, 0, 0.85) 100%
+    ),
+    var(--gradient-main);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particles::before,
+.particles::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+// Первый слой частиц
+.particles::before {
+  background-image: 
+    radial-gradient(2px 2px at 40% 70%, var(--particle-cyan) 50%, transparent 0),
+    radial-gradient(2px 2px at 70% 30%, var(--particle-purple) 50%, transparent 0),
+    radial-gradient(3px 3px at 30% 50%, var(--particle-cyan) 50%, transparent 0),
+    radial-gradient(3px 3px at 60% 80%, var(--particle-purple) 50%, transparent 0),
+    radial-gradient(2px 2px at 20% 20%, var(--particle-cyan) 50%, transparent 0);
+  background-size: 50% 50%;
+  animation: particles1 20s linear infinite;
+}
+
+// Второй слой частиц
+.particles::after {
+  background-image: 
+    radial-gradient(3px 3px at 45% 45%, var(--particle-purple) 50%, transparent 0),
+    radial-gradient(2px 2px at 65% 65%, var(--particle-cyan) 50%, transparent 0),
+    radial-gradient(2px 2px at 35% 85%, var(--particle-purple) 50%, transparent 0),
+    radial-gradient(3px 3px at 80% 25%, var(--particle-cyan) 50%, transparent 0),
+    radial-gradient(2px 2px at 15% 55%, var(--particle-purple) 50%, transparent 0);
+  background-size: 50% 50%;
+  animation: particles2 25s linear infinite;
+}
+
+@keyframes particles1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10%, -10%);
+  }
+  50% {
+    transform: translate(0, -20%);
+  }
+  75% {
+    transform: translate(-10%, -10%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes particles2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-10%, 10%);
+  }
+  50% {
+    transform: translate(0, 20%);
+  }
+  75% {
+    transform: translate(10%, 10%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particles {
+    animation: none;
+  }
 }
 
 main {
   flex: 1;
-  padding-top: 80px; // высота навбара
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 2rem 2rem;
+  padding-top: 180px;
 }
 
-button {
-  font-family: 'Courier New', monospace;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Общий класс для контейнера
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  justify-content: center;
 }

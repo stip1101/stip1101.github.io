@@ -1,4 +1,16 @@
-// Временно скрываем футер
-footer {
-  display: none !important;
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  opacity: 0;
+  animation: fadeInSlideUp 0.8s ease-out forwards;
+  animation-delay: 1s;
 } 

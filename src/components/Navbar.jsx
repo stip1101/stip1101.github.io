@@ -1,50 +1,46 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import '../assets/styles/Navbar.scss'
+import logohome from '/images/logohome.svg'
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <NavLink to="/" className="logo">
-          <img src="/images/logohome.svg" alt="Solus Ambassadors" />
-          <span className="logo-text">
-            <span className="solus">Solus</span>
-            <span className="ambassadors">Ambassadors</span>
-          </span>
-        </NavLink>
-        
-        <div className="nav-links">
-          <NavLink 
-            to="/" 
-            className={({ isActive }) => isActive ? 'active' : ''}
-          >
-            //HOME
-          </NavLink>
-          <NavLink 
-            to="/content-creation" 
-            className={({ isActive }) => isActive ? 'active' : ''}
-          >
-            //CONTENT CREATION
-          </NavLink>
-          <NavLink 
-            to="/business-development" 
-            className={({ isActive }) => isActive ? 'active' : ''}
-          >
-            //BUSINESS DEV
+      <div className="container">
+        <div className="navbar-brand">
+          <NavLink to="/">
+            <div className="logo-container">
+              <img src={logohome} alt="Solus Logo" className="logo-image" />
+              <div className="logo-text">
+                <span className="logo-main">SOLUS</span>
+                <span className="logo-sub">AMBASSADORS</span>
+              </div>
+            </div>
           </NavLink>
         </div>
 
-        <motion.a 
-          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="profile-btn"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
+          <NavLink to="/" end>
+            HOME
+          </NavLink>
+          <NavLink to="/content-creation">
+            CONTENT CREATION
+          </NavLink>
+          <NavLink to="/business-development">
+            BUSINESS DEVELOPMENT
+          </NavLink>
+        </div>
+
+        <div 
+          className={`hamburger ${isOpen ? 'active' : ''}`}
+          onClick={() => setIsOpen(!isOpen)}
         >
-          MY PROFILE
-        </motion.a>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </nav>
   )

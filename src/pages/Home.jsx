@@ -5,10 +5,13 @@ import '../assets/styles/Home.scss'
 import ParticlesBackground from '../components/ParticlesBackground'
 import LogoParticles from '../components/LogoParticles'
 import { RiPencilRuler2Line, RiTeamLine, RiHandCoinLine, RiLineChartLine } from 'react-icons/ri'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [contentVisible, setContentVisible] = useState(false)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const loadTimer = setTimeout(() => {
@@ -140,14 +143,105 @@ const Home = () => {
                           transition={{ duration: 0.8 }}
                         >
                           <p className="description">
-                            The Solus Ambassador Program offers exceptional opportunities for{' '}
-                            <span className="highlight-purple">content creators</span> and{' '}
-                            <span className="highlight-cyan">business developers</span> alike.
+                            Unlock Opportunities. Earn Rewards.
                           </p>
                           <p className="sub-description">
-                            Choose your path, join the Solus community, and earn exclusive rewards for your contributions!
+                            Become a <span className="highlight">Content Creator</span> or <span className="highlight">Business Developer</span> and start earning exclusive rewards. Share your skills, grow with the Solus community, and get paid for your contributions.
+                          </p>
+                          <p className="sub-description bold">
+                            Choose your path today and turn your efforts into real rewards!
                           </p>
                         </motion.div>
+
+                        <div className="cards-wrapper">
+                          <motion.div 
+                            className="glass-card"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            whileHover={{ 
+                              scale: 1.02,
+                              transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+                            }}
+                            onClick={() => navigate('/content-creation')}
+                          >
+                            <motion.div 
+                              className="card-background"
+                              initial={{ scale: 0.8, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ 
+                                duration: 0.8,
+                                ease: [0.4, 0, 0.2, 1]
+                              }}
+                            >
+                              <motion.img 
+                                src="/images/creators.webp" 
+                                alt="Content Creators"
+                                whileHover={{ 
+                                  scale: 1.05,
+                                  transition: { duration: 0.4 }
+                                }}
+                              />
+                            </motion.div>
+                            <div className="card-content">
+                              <motion.div 
+                                className="card-title"
+                                whileHover={{
+                                  color: "#06EFFF",
+                                  transition: { duration: 0.3 }
+                                }}
+                              >
+                                <h3>Content Creators</h3>
+                              </motion.div>
+                            </div>
+                          </motion.div>
+
+                          <motion.div 
+                            className="glass-card"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            whileHover={{ 
+                              scale: 1.02,
+                              transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+                            }}
+                            onClick={() => navigate('/business-development')}
+                          >
+                            <motion.div 
+                              className="card-background"
+                              initial={{ scale: 0.8, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ 
+                                duration: 0.8,
+                                ease: [0.4, 0, 0.2, 1]
+                              }}
+                            >
+                              <motion.img 
+                                src="/images/developers.webp" 
+                                alt="Business Developers"
+                                whileHover={{ 
+                                  scale: 1.05,
+                                  transition: { duration: 0.4 }
+                                }}
+                              />
+                            </motion.div>
+                            <motion.div 
+                              className="card-content"
+                              whileHover={{ y: -5 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <div className="card-title">
+                                <h3>Business Developers</h3>
+                                <motion.div 
+                                  className="title-underline"
+                                  initial={{ width: "0%" }}
+                                  whileHover={{ width: "100%" }}
+                                  transition={{ duration: 0.3 }}
+                                />
+                              </div>
+                            </motion.div>
+                          </motion.div>
+                        </div>
                       </div>
                     </section>
                   )}

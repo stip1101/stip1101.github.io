@@ -66,7 +66,7 @@ const Home = () => {
                           transition={{ duration: 0.8 }}
                         >
                           <h2>
-                            Your <span className="highlight-cyan">Contributions</span>, Your <span className="highlight-purple">Rewards</span>
+                            Your <span className="highlight-cyan">Contributions</span>, Your <span className="highlight-purple">Benefits</span>
                           </h2>
                         </motion.div>
                         <div className="rewards-grid">
@@ -122,6 +122,32 @@ const Home = () => {
                             </motion.div>
                           ))}
                         </div>
+                      </div>
+                    </section>
+                  )}
+                </div>
+
+                <div className="section">
+                  {contentVisible && (
+                    <section className="opportunities-section">
+                      <ParticlesBackground />
+                      <div className="container">
+                        <motion.div 
+                          className="hero-content"
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8 }}
+                        >
+                          <p className="description">
+                            The Solus Ambassador Program offers exceptional opportunities for{' '}
+                            <span className="highlight-purple">content creators</span> and{' '}
+                            <span className="highlight-cyan">business developers</span> alike.
+                          </p>
+                          <p className="sub-description">
+                            Choose your path, join the Solus community, and earn exclusive rewards for your contributions!
+                          </p>
+                        </motion.div>
                       </div>
                     </section>
                   )}

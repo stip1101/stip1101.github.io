@@ -14,7 +14,7 @@ const ParticlesBackground = () => {
     setCanvasSize()
 
     const particles = []
-    const particleCount = 50
+    const particleCount = 25 // Уменьшили с 50 до 25
 
     class Particle {
       constructor() {
@@ -23,9 +23,7 @@ const ParticlesBackground = () => {
         this.size = Math.random() * 2 + 1
         this.angle = Math.random() * 360
         this.speed = 0.2 + Math.random() * 0.3
-        this.color = Math.random() > 0.5 ? 
-          'rgba(0, 206, 209, 0.4)' :  // циан
-          'rgba(73, 42, 94, 0.4)'     // фиолетовый
+        this.color = 'rgba(0, 206, 209, 0.4)' // Оставили только голубой цвет
       }
 
       update() {

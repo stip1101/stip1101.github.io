@@ -66,7 +66,7 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                 d: generateAestheticPath(i, position, "primary"),
                 opacity: 0.15 + i * 0.02,
                 width: 4 + i * 0.3,
-                duration: 25,
+                duration: 2.5,
                 delay: 0,
             })),
         [position]
@@ -79,7 +79,7 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                 d: generateAestheticPath(i, position, "secondary"),
                 opacity: 0.12 + i * 0.015,
                 width: 3 + i * 0.25,
-                duration: 20,
+                duration: 2,
                 delay: 0,
             })),
         [position]
@@ -92,7 +92,7 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                 d: generateAestheticPath(i, position, "accent"),
                 opacity: 0.08 + i * 0.12,
                 width: 2 + i * 0.2,
-                duration: 15,
+                duration: 1.5,
                 delay: 0,
             })),
         [position]
@@ -103,8 +103,8 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
         opacity: 1,
         scale: 1,
         transition: {
-            opacity: { duration: 1 },
-            scale: { duration: 1 },
+            opacity: { duration: 0.8 },
+            scale: { duration: 0.8 },
         },
     };
 
@@ -165,12 +165,12 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{
                                 ...sharedAnimationProps,
-                                y: [0, -15, 0],
+                                translateY: [0, -60, 0],
                             }}
                             transition={{
                                 ...sharedAnimationProps.transition,
-                                y: {
-                                    duration: 8,
+                                translateY: {
+                                    duration: 3,
                                     repeat: Infinity,
                                     ease: "easeInOut",
                                     repeatType: "reverse",
@@ -192,12 +192,12 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{
                                 ...sharedAnimationProps,
-                                y: [0, -10, 0],
+                                translateY: [0, -40, 0],
                             }}
                             transition={{
                                 ...sharedAnimationProps.transition,
-                                y: {
-                                    duration: 6,
+                                translateY: {
+                                    duration: 2.5,
                                     repeat: Infinity,
                                     ease: "easeInOut",
                                     repeatType: "reverse",
@@ -219,12 +219,12 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{
                                 ...sharedAnimationProps,
-                                y: [0, -5, 0],
+                                translateY: [0, -25, 0],
                             }}
                             transition={{
                                 ...sharedAnimationProps.transition,
-                                y: {
-                                    duration: 4,
+                                translateY: {
+                                    duration: 2,
                                     repeat: Infinity,
                                     ease: "easeInOut",
                                     repeatType: "reverse",
@@ -241,6 +241,11 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
 
 // Memoized AnimatedTitle component
 const AnimatedTitle = memo(function AnimatedTitle({ title, subtitle }) {
+    const words = title.split(" ");
+    const first = words[0]; // OCEAN
+    const middle = words.slice(1, -1).join(" "); // RESEARCH
+    const last = words[words.length - 1]; // HUB
+    
     return (
         <div className="text-center">
             <motion.h1 
@@ -252,7 +257,9 @@ const AnimatedTitle = memo(function AnimatedTitle({ title, subtitle }) {
                     ease: [0.2, 0.65, 0.3, 0.9],
                 }}
             >
-                {title}
+                <span className="highlight-word">{first}</span>
+                {middle && ` ${middle} `}
+                <span className="highlight-word">{last}</span>
             </motion.h1>
             {subtitle && (
                 <motion.p
@@ -261,7 +268,6 @@ const AnimatedTitle = memo(function AnimatedTitle({ title, subtitle }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                         duration: 1.2,
-                        delay: 0.3,
                         ease: [0.2, 0.65, 0.3, 0.9],
                     }}
                 >
@@ -288,7 +294,7 @@ export default memo(function BackgroundPaths({
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 2 }}
+                    transition={{ duration: 1.2 }}
                     className="max-w-4xl mx-auto"
                 >
                     <AnimatedTitle title={title} subtitle={subtitle} />
@@ -298,7 +304,6 @@ export default memo(function BackgroundPaths({
                             animate={{ opacity: 1, y: 0 }}
                             transition={{
                                 duration: 1.2,
-                                delay: 0.6,
                                 ease: [0.2, 0.65, 0.3, 0.9],
                             }}
                         >

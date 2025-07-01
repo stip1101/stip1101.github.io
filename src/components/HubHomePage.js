@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Database, TrendingUp, Users, Network, Zap, ArrowRight, Star, Globe, Shield } from 'lucide-react';
+import { Brain, Database, TrendingUp, Users, Network, ArrowRight } from 'lucide-react';
 import BackgroundPaths from './BackgroundPaths';
 import './HubHomePage.css';
 
@@ -53,13 +53,6 @@ const HubHomePage = ({ setActiveSection }) => {
     }
   ];
 
-  const stats = [
-    { label: 'Total Projects Analyzed', value: '34', icon: Database },
-    { label: 'Active Integrations', value: '12', icon: Network },
-    { label: 'Research Papers', value: '89', icon: Star },
-    { label: 'Community Members', value: '2.5K', icon: Users }
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -86,8 +79,8 @@ const HubHomePage = ({ setActiveSection }) => {
     <div className="hub-homepage">
       {/* Hero Section with Animated Background */}
       <BackgroundPaths 
-        title="Welcome to Ocean Research HUB"
-        subtitle="Your comprehensive gateway to the Ocean Protocol ecosystem. Explore AI companies, analyze data markets, monitor predictions, and connect with the decentralized data economy."
+        title="OCEAN RESEARCH HUB"
+        subtitle="Your comprehensive gateway to the Ocean Protocol ecosystem. Explore AI companies, data markets, and the decentralized data economy."
       >
         <motion.button
           className="hero-cta-button"
@@ -96,43 +89,14 @@ const HubHomePage = ({ setActiveSection }) => {
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
+          transition={{ duration: 0.6 }}
         >
           <span>Explore AI Research</span>
           <ArrowRight size={20} />
         </motion.button>
       </BackgroundPaths>
 
-      {/* Stats Section */}
-      <motion.section 
-        className="stats-section-new"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="stats-grid-new">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={index}
-                className="stat-card-new"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="stat-icon-new">
-                  <Icon size={28} />
-                </div>
-                <div className="stat-content-new">
-                  <h3>{stat.value}</h3>
-                  <p>{stat.label}</p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </motion.section>
+      {/* Stats Section removed as per design update */}
 
       {/* Sections Grid */}
       <motion.section 
@@ -205,48 +169,7 @@ const HubHomePage = ({ setActiveSection }) => {
         </div>
       </motion.section>
 
-      {/* Features Highlights */}
-      <motion.section 
-        className="features-section-new"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="features-content-new">
-          <motion.h2 variants={itemVariants}>Why Ocean Protocol HUB?</motion.h2>
-          <div className="features-grid-new">
-            <motion.div 
-              className="feature-item-new"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <Globe className="feature-icon-new" />
-              <h3>Decentralized</h3>
-              <p>Built on Ocean Protocol's decentralized infrastructure for data and AI</p>
-            </motion.div>
-            
-            <motion.div 
-              className="feature-item-new"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <Shield className="feature-icon-new" />
-              <h3>Secure</h3>
-              <p>Privacy-preserving compute and secure data sharing protocols</p>
-            </motion.div>
-            
-            <motion.div 
-              className="feature-item-new"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <Zap className="feature-icon-new" />
-              <h3>Innovative</h3>
-              <p>Cutting-edge tools for AI research and data market analysis</p>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
+      {/* Features section removed as per design update */}
     </div>
   );
 };

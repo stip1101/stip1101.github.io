@@ -32,7 +32,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
           whileTap={{ scale: 0.95 }}
         >
           <Zap className="logo-icon" />
-          <span className="logo-text">Ocean Protocol HUB</span>
+          <span className="logo-text">Ocean Research HUB</span>
         </motion.div>
         
         <div className="nav-items">

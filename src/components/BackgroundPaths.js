@@ -98,14 +98,10 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
         [position]
     );
 
-    // Shared animation configuration
-    const sharedAnimationProps = {
+    // Базовые целевые значения
+    const baseAnimate = {
         opacity: 1,
         scale: 1,
-        transition: {
-            opacity: { duration: 0.8 },
-            scale: { duration: 0.8 },
-        },
     };
 
     return (
@@ -164,11 +160,12 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                             strokeLinecap="round"
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{
-                                ...sharedAnimationProps,
-                                translateY: [0, -60, 0],
+                                ...baseAnimate,
+                                translateY: [0, -4, 0],
                             }}
                             transition={{
-                                ...sharedAnimationProps.transition,
+                                opacity: { duration: 0.8 },
+                                scale: { duration: 0.8 },
                                 translateY: {
                                     duration: 3,
                                     repeat: Infinity,
@@ -191,11 +188,12 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                             strokeLinecap="round"
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{
-                                ...sharedAnimationProps,
-                                translateY: [0, -40, 0],
+                                ...baseAnimate,
+                                translateY: [0, -2, 0],
                             }}
                             transition={{
-                                ...sharedAnimationProps.transition,
+                                opacity: { duration: 0.8 },
+                                scale: { duration: 0.8 },
                                 translateY: {
                                     duration: 2.5,
                                     repeat: Infinity,
@@ -218,11 +216,12 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                             strokeLinecap="round"
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{
-                                ...sharedAnimationProps,
-                                translateY: [0, -25, 0],
+                                ...baseAnimate,
+                                translateY: [0, -1, 0],
                             }}
                             transition={{
-                                ...sharedAnimationProps.transition,
+                                opacity: { duration: 0.8 },
+                                scale: { duration: 0.8 },
                                 translateY: {
                                     duration: 2,
                                     repeat: Infinity,

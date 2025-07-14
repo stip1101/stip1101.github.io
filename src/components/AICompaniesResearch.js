@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useDeferredValue, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { relationshipTypes, projects, metrics, insights } from '../data/projectsData';
@@ -15,6 +15,9 @@ const AICompaniesResearch = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState(projects);
 
+  // Отложенное значение для снижения количества фильтраций при быстром вводе
+  const deferredSearch = useDeferredValue(searchTerm);
+
   const handleProjectClick = (project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
@@ -25,22 +28,25 @@ const AICompaniesResearch = () => {
     setSelectedProject(null);
   };
 
+  const stableProjects = useMemo(() => projects, []);
+
   useEffect(() => {
-    let filtered = projects;
-    
+    let filtered = stableProjects;
+
     if (selectedType !== 'All') {
       filtered = filtered.filter(project => project.type === selectedType);
     }
-    
-    if (searchTerm) {
+
+    const q = deferredSearch.trim().toLowerCase();
+    if (q) {
       filtered = filtered.filter(project => 
-        project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase())
+        project.name.toLowerCase().includes(q) ||
+        project.description.toLowerCase().includes(q)
       );
     }
-    
+
     setFilteredProjects(filtered);
-  }, [selectedType, searchTerm]);
+  }, [selectedType, deferredSearch, stableProjects]);
 
   const containerVariants = {
     hidden: { opacity: 0 },

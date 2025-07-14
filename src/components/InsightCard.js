@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, Target, Lightbulb } from 'lucide-react';
 
@@ -108,4 +108,4 @@ const InsightCard = ({ insight }) => {
   );
 };
 
-export default InsightCard; 
+export default memo(InsightCard); 

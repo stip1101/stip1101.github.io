@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Database, TrendingUp, Users, Network, ArrowRight } from 'lucide-react';
+import { Brain, TrendingUp, Users, Network, ArrowRight } from 'lucide-react';
 import BackgroundPaths from './BackgroundPaths';
 import './HubHomePage.css';
 
@@ -16,12 +16,12 @@ const HubHomePage = ({ setActiveSection }) => {
       gradient: 'linear-gradient(135deg, #ff69b4 0%, #ff1493 100%)'
     },
     {
-      id: 'data-marketplace',
-      title: 'Data Marketplace',
-      description: 'Decentralized marketplace for data assets, AI models, and compute resources',
-      icon: Database,
-      status: 'coming-soon',
-      features: ['Data Asset Trading', 'AI Model Marketplace', 'Compute Resource Sharing', 'Data NFTs'],
+      id: 'ai-data-scientists',
+      title: 'AI & Data Scientists',
+      description: 'Leading AI engineers and data scientists building ML models and working with large datasets',
+      icon: Users,
+      status: 'active',
+      features: ['AI Researchers', 'ML Engineers', 'Data Scientists', 'Innovation Leaders'],
       gradient: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)'
     },
     {

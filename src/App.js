@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import Navigation from './components/Navigation';
 import HubHomePage from './components/HubHomePage';
-import AICompaniesResearch from './components/AICompaniesResearch';
 import './App.css';
+
+// Lazy-loaded секции для сокращения первоначального бандла
+const AICompaniesResearch = lazy(() => import('./components/AICompaniesResearch'));
+const AIDataScientists = lazy(() => import('./components/AIDataScientists'));
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -13,7 +16,8 @@ function App() {
         return <HubHomePage setActiveSection={setActiveSection} />;
       case 'ai-companies':
         return <AICompaniesResearch />;
-      case 'data-marketplace':
+      case 'ai-data-scientists':
+        return <AIDataScientists />;
       case 'predictoor':
       case 'ocean-nodes':
       case 'community':
@@ -58,7 +62,10 @@ function App() {
         activeSection={activeSection} 
         setActiveSection={setActiveSection} 
       />
-      {renderActiveSection()}
+      {/* Suspense обеспечивает плавный спиннер во время ленивой подгрузки */}
+      <Suspense fallback={<div className="loading">Загрузка...</div>}>
+        {renderActiveSection()}
+      </Suspense>
     </div>
   );
 }

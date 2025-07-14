@@ -98,12 +98,6 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
         [position]
     );
 
-    // Базовые целевые значения
-    const baseAnimate = {
-        opacity: 1,
-        scale: 1,
-    };
-
     return (
         <div className="floating-paths-inner">
             <svg
@@ -150,89 +144,103 @@ const FloatingPaths = memo(function FloatingPaths({ position }) {
                     </linearGradient>
                 </defs>
 
-                <g className="primary-waves">
+                {/* Групповая анимация для снижения нагрузки: теперь бесконечно анимируются
+                    только 3 группы, а пути статичны после появления. */}
+
+                <motion.g
+                    className="primary-waves"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{
+                        opacity: 1,
+                        scale: 1,
+                        translateY: [0, -4, 0],
+                    }}
+                    transition={{
+                        opacity: { duration: 0.8 },
+                        scale: { duration: 0.8 },
+                        translateY: {
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            repeatType: "reverse",
+                        },
+                    }}
+                >
                     {primaryPaths.map((path) => (
-                        <motion.path
+                        <path
                             key={path.id}
                             d={path.d}
                             stroke="url(#oceanGradient)"
                             strokeWidth={path.width}
                             strokeLinecap="round"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{
-                                ...baseAnimate,
-                                translateY: [0, -4, 0],
-                            }}
-                            transition={{
-                                opacity: { duration: 0.8 },
-                                scale: { duration: 0.8 },
-                                translateY: {
-                                    duration: 3,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                            }}
                             style={{ opacity: path.opacity }}
                         />
                     ))}
-                </g>
+                </motion.g>
 
-                <g className="secondary-waves" style={{ opacity: 0.8 }}>
+                <motion.g
+                    className="secondary-waves"
+                    style={{ opacity: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{
+                        opacity: 1,
+                        scale: 1,
+                        translateY: [0, -2, 0],
+                    }}
+                    transition={{
+                        opacity: { duration: 0.8 },
+                        scale: { duration: 0.8 },
+                        translateY: {
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            repeatType: "reverse",
+                        },
+                    }}
+                >
                     {secondaryPaths.map((path) => (
-                        <motion.path
+                        <path
                             key={path.id}
                             d={path.d}
                             stroke="url(#oceanGradient2)"
                             strokeWidth={path.width}
                             strokeLinecap="round"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{
-                                ...baseAnimate,
-                                translateY: [0, -2, 0],
-                            }}
-                            transition={{
-                                opacity: { duration: 0.8 },
-                                scale: { duration: 0.8 },
-                                translateY: {
-                                    duration: 2.5,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                            }}
                             style={{ opacity: path.opacity }}
                         />
                     ))}
-                </g>
+                </motion.g>
 
-                <g className="accent-waves" style={{ opacity: 0.6 }}>
+                <motion.g
+                    className="accent-waves"
+                    style={{ opacity: 0.6 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{
+                        opacity: 1,
+                        scale: 1,
+                        translateY: [0, -1, 0],
+                    }}
+                    transition={{
+                        opacity: { duration: 0.8 },
+                        scale: { duration: 0.8 },
+                        translateY: {
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            repeatType: "reverse",
+                        },
+                    }}
+                >
                     {accentPaths.map((path) => (
-                        <motion.path
+                        <path
                             key={path.id}
                             d={path.d}
                             stroke="url(#oceanGradient)"
                             strokeWidth={path.width}
                             strokeLinecap="round"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{
-                                ...baseAnimate,
-                                translateY: [0, -1, 0],
-                            }}
-                            transition={{
-                                opacity: { duration: 0.8 },
-                                scale: { duration: 0.8 },
-                                translateY: {
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                            }}
                             style={{ opacity: path.opacity }}
                         />
                     ))}
-                </g>
+                </motion.g>
             </svg>
         </div>
     );

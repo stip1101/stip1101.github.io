@@ -1590,6 +1590,139 @@
   }
 }
 
+/* AI Engineers specific styles */
+.engineer-card .project-affiliations {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.ai-model-info {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff5f8 100%);
+  border-radius: 8px;
+  border-left: 3px solid #ff69b4;
+}
+
+.ai-model-info strong {
+  color: #ff1493;
+  font-weight: 600;
+}
+
+.ai-model-highlight {
+  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.ai-model-section {
+  margin-bottom: 2rem;
+}
+
+.ai-model-section h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ff1493;
+  margin-bottom: 1rem;
+}
+
+.contributions-section {
+  margin-bottom: 2rem;
+}
+
+.contributions-section h4 {
+  color: #ff1493;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.contributions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.contribution-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff5f8 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 105, 180, 0.1);
+  transition: all 0.3s ease;
+}
+
+.contribution-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+}
+
+.contribution-item svg {
+  color: #ff69b4;
+  flex-shrink: 0;
+}
+
+.agentic-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  border-radius: 50%;
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.agentic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.engineer-affiliations {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.external-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .contributions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ai-model-info {
+    padding: 0.5rem;
+  }
+  
+  .contribution-item {
+    padding: 0.5rem;
+  }
+}
+
 @media (max-width: 480px) {
   .dashboard-header {
     padding: 2rem 1rem;

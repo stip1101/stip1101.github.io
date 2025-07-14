@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Zap, Brain, Database, Network, Star, TrendingUp } from 'lucide-react';
 
@@ -226,4 +226,4 @@ const ProjectCard = ({ project, onClick }) => {
   );
 };
 
-export default ProjectCard; 
+export default memo(ProjectCard); 

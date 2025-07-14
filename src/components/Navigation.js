@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Database, TrendingUp, Users, Zap, Network, Home } from 'lucide-react';
+import { Brain, Database, TrendingUp, Users, Zap, Network, Home, Code } from 'lucide-react';
 import './Navigation.css';
 
 const Navigation = ({ activeSection, setActiveSection }) => {
   const navItems = [
     { id: 'home', name: 'Ocean HUB', icon: Home, description: 'Main Hub' },
     { id: 'ai-companies', name: 'AI Companies Research', icon: Brain, description: 'AI/Blockchain Analysis' },
-    { id: 'data-marketplace', name: 'Data Marketplace', icon: Database, description: 'Coming Soon' },
+    { id: 'ai-data-scientists', name: 'AI & Data Scientists', icon: Code, description: 'AI Engineers & Data Scientists' },
     { id: 'predictoor', name: 'Predictoor Analytics', icon: TrendingUp, description: 'Coming Soon' },
     { id: 'ocean-nodes', name: 'Ocean Nodes', icon: Network, description: 'Coming Soon' },
     { id: 'community', name: 'Community', icon: Users, description: 'Coming Soon' }

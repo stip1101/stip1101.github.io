@@ -38,4 +38,11 @@ body {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+.loading {
+  padding: 4rem 1rem;
+  font-size: 1.2rem;
+  color: #ff1493;
+  text-align: center;
 } 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Database, TrendingUp, Users, Zap, Network, Home, Code } from 'lucide-react';
+import { Brain, TrendingUp, Users, Zap, Network, Home, Code } from 'lucide-react';
 import './Navigation.css';
 
 const Navigation = ({ activeSection, setActiveSection }) => {

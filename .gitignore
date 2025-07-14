@@ -30,7 +30,7 @@ coverage/
 .vscode/
 .idea/
 
-# macOS system files
+# macOS system file
 .DS_Store
 
 # Misc

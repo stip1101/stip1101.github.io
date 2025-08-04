@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, TrendingUp, Users, Network, ArrowRight } from 'lucide-react';
+import { Brain, Server, Users, Network, ArrowRight } from 'lucide-react';
 import BackgroundPaths from './BackgroundPaths';
 import './HubHomePage.css';
 
@@ -25,12 +25,12 @@ const HubHomePage = ({ setActiveSection }) => {
       gradient: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)'
     },
     {
-      id: 'predictoor',
-      title: 'Predictoor Analytics',
-      description: 'Advanced prediction markets and analytics powered by Ocean Protocol',
-      icon: TrendingUp,
-      status: 'coming-soon',
-      features: ['Prediction Markets', 'Analytics Dashboard', 'Trading Strategies', 'Performance Metrics'],
+      id: 'compute-providers',
+      title: 'AI Compute Infrastructure Providers',
+      description: 'Cloud and decentralized compute providers powering the AI revolution with GPUs, custom chips, and scalable infrastructure',
+      icon: Server,
+      status: 'active',
+      features: ['GPU Clusters', 'Custom AI Chips', 'Global Infrastructure', 'Pricing Analysis'],
       gradient: 'linear-gradient(135deg, #059669 0%, #10b981 100%)'
     },
     {

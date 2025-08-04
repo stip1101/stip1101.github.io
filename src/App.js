@@ -6,6 +6,7 @@ import './App.css';
 // Lazy-loaded секции для сокращения первоначального бандла
 const AICompaniesResearch = lazy(() => import('./components/AICompaniesResearch'));
 const AIDataScientists = lazy(() => import('./components/AIDataScientists'));
+const AIComputeProviders = lazy(() => import('./components/AIComputeProviders'));
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -18,7 +19,8 @@ function App() {
         return <AICompaniesResearch />;
       case 'ai-data-scientists':
         return <AIDataScientists />;
-      case 'predictoor':
+      case 'compute-providers':
+        return <AIComputeProviders />;
       case 'ocean-nodes':
       case 'community':
         return (

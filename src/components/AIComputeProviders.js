@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useDeferredValue, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { providerTypes, computeProviders, metrics, insights } from '../data/computeProvidersData';
-import { Search, Filter, Server, Zap, Globe, TrendingUp, DollarSign } from 'lucide-react';
+import { providerTypes, computeProviders, metrics } from '../data/computeProvidersData';
+import { Search, Filter, Server, Globe, TrendingUp, DollarSign } from 'lucide-react';
 import ComputeProviderCard from './ComputeProviderCard';
-import InsightCard from './InsightCard';
 import ComputeProviderDetailModal from './ComputeProviderDetailModal';
 import './Dashboard.css';
 
